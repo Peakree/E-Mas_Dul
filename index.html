@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>E-Gold Store</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo">E-Mas Dul</div>
+    <nav>
+      <button data-go="home">Beranda</button>
+      <button data-go="kyc">Verifikasi KYC</button>
+      <button data-go="dashboard">Dashboard</button>
+      <button id="navauth" data-go="auth">Masuk / Daftar</button>
+    </nav>
+    <button id="th" class="btn o sm" aria-label="Ganti tema terang atau gelap">Tema</button>
+  </header>
+
+  <main>
+    <!-- BERANDA -->
+    <section id="home" class="view">
+      <div class="hero">
+        <div>
+          <h1>Beli Emas,Aman dan Terpercaya? <p>E-Mas Dul aja...</p>.</h1>
+          <p>Identitas diverifikasi lewat KYC, sertifikat kepemilikan dikunci dengan password, dan catatan transaksi
+            dienkripsi sebelum disimpan.</p>
+          <div class="row">
+            <button class="btn" data-go="kyc">Verifikasi identitas</button>
+            <button class="btn o" id="tocat">Lihat katalog</button>
+          </div>
+        </div>
+        <div class="card live">
+          <small>Harga beli per gram (simulasi, diperbarui tiap 3 detik)</small>
+          <div class="pr" id="pr">-</div>
+          <div id="chg" class="up">-</div>
+          <svg class="sp" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
+            <polyline id="sp" points="" />
+          </svg>
+          <div class="two"><small>Harga buyback per gram</small><b id="bb">-</b></div>
+        </div>
+      </div>
+
+      <h2 id="catalog">Katalog logam mulia</h2>
+      <div class="grid" id="cat"></div>
+
+      <h2>Cara kami melindungi data Anda</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Verifikasi KTP</h3>
+          <p class="mut">Akun hanya bisa bertransaksi setelah KTP dipindai dan NIK divalidasi. Foto KTP tidak disimpan.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Sertifikat PDF terkunci</h3>
+          <p class="mut">Setiap sertifikat dan invoice diberi password sebelum diunduh.</p>
+        </div>
+        <div class="card">
+          <h3>Catatan terenkripsi</h3>
+          <p class="mut">Catatan transaksi diacak dengan AES-256 dan hanya terbaca dengan password Anda.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MASUK / DAFTAR -->
+    <section id="auth" class="view">
+      <h2>Akun E-Mas Dul</h2>
+      <div class="card" style="max-width:440px">
+        <div class="tabs"><button id="at1" class="on">Masuk</button><button id="at2">Daftar</button></div>
+        <label for="au">Username</label>
+        <input id="au" autocomplete="username" placeholder="contoh: budi_01">
+        <label for="ap">Password</label>
+        <input id="ap" type="password" autocomplete="current-password" placeholder="Minimal 6 karakter">
+        <div id="ap2w" style="display:none"><label for="ap2">Ulangi password</label><input id="ap2" type="password"
+            autocomplete="new-password" placeholder="Ketik ulang password"></div>
+        <button class="btn" id="ago">Masuk</button>
+        <p class="mut" style="margin-top:14px;font-size:.85rem">Akun disimpan di browser ini saja, tanpa server.
+          Password di-hash dengan PBKDF2 dan tidak disimpan apa adanya. Setelah logout, data KYC, emas, dan catatanmu
+          tetap ada dan muncul lagi saat masuk.</p>
+      </div>
+    </section>
+
+    <!-- KYC -->
+    <section id="kyc" class="view">
+      <h2>Verifikasi identitas (KYC)</h2>
+      <div class="card" style="max-width:560px">
+        <div id="kdone" style="display:none"></div>
+        <div id="kform">
+          <label>Foto KTP</label>
+          <label class="drop" id="drop"><input type="file" id="kf" accept="image/*"><span>Ketuk untuk memilih foto KTP,
+              data akan terbaca otomatis (JPG/PNG, maks. 5 MB)</span><img id="pv" alt="Pratinjau KTP"></label>
+          <div class="prog" id="prog"><i></i></div>
+          <small id="pt"></small>
+          <label for="kn" style="display:block;margin-top:12px">Nama (terbaca otomatis)</label>
+          <input id="kn" autocomplete="off" placeholder="Terisi setelah foto KTP dipilih">
+          <label for="kk">NIK (16 digit)</label>
+          <input id="kk" inputmode="numeric" maxlength="16" autocomplete="off" placeholder="Terisi otomatis">
+          <label for="kt">Tempat dan tanggal lahir</label>
+          <input id="kt" autocomplete="off" placeholder="Terisi otomatis">
+          <label for="ka">Alamat</label>
+          <input id="ka" autocomplete="off" placeholder="Terisi otomatis">
+          <div class="row"><button class="btn" id="scan">Konfirmasi dan verifikasi</button></div>
+          <p class="mut" style="margin-top:14px;font-size:.85rem">Teks KTP dibaca oleh OCR langsung di browser, foto
+            tidak dikirim ke server mana pun. Hasil bacaan bisa meleset, jadi periksa lagi sebelum konfirmasi.
+            Pencocokan ke database dukcapil hanya simulasi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="view">
+      <h2>Dashboard</h2>
+      <div class="grid" id="stats"></div>
+      <h2>Emas yang dimiliki</h2>
+      <div class="grid" id="hold"></div>
+      <h2>Riwayat dan sertifikat</h2>
+      <div id="txs"></div>
+      <h2>Catatan transaksi aman</h2>
+      <div class="card">
+        <label for="nt">Catatan (misalnya instruksi transfer)</label>
+        <textarea id="nt" rows="3" placeholder="Tulis catatan rahasia"></textarea>
+        <label for="npw">Password enkripsi</label>
+        <input id="npw" type="password" autocomplete="new-password" placeholder="Dipakai untuk mengunci catatan ini">
+        <button class="btn" id="ns">Enkripsi dan simpan</button>
+        <p class="mut" style="margin-top:10px;font-size:.85rem">Password tidak disimpan. Kalau lupa, catatan tidak bisa
+          dibuka lagi. Untuk membukanya, masukkan password di kartu catatan di bawah.</p>
+      </div>
+      <div id="notes" style="margin-top:16px"></div>
+      <div style="margin-top:40px"><button class="btn o sm" data-delacc="1">Hapus akun ini</button></div>
+    </section>
+  </main>
+
+  <div id="modal">
+    <div class="card">
+      <h3 id="mt"></h3>
+      <p id="mb" class="mut" style="margin:10px 0"></p><input id="mi" autocomplete="off">
+      <div class="row"><button class="btn" id="mok">Lanjut</button><button class="btn o" id="mno">Batal</button></div>
+    </div>
+  </div>
+  <div id="toast" role="status"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
